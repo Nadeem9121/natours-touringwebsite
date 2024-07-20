@@ -1,0 +1,43 @@
+extends base
+block content
+    .main 
+        .card-container
+            each Tour in tour
+                .card
+                    .card__header 
+                        .card__picture 
+                            .card__picture-overlay &nbsp;
+                            img.card__picture-img(src=`/img/tours/${Tour.imageCover}`, alt=`${Tour.name}`)
+                        h3.heading-tertirary 
+                            span= Tour.name
+                    .card__details  
+                        h4.card__sub-heading= `${Tour.difficulty} ${Tour.duration}-day tour`
+                        p.card__text=Tour.summary
+                        .card__data     
+                            svg.card__icon 
+                                use(xlink:href='/img/icons.svg#icon-map-pin')
+                            span=Tour.startLocation.description
+                        .card__data 
+                            svg.card__icon 
+                                use(xlink:href='/img/icons.svg#icon-calendar')
+                            span=Tour.startDates[0].toLocaleString('en-us',{month:'long',year:'numeric'})
+                        .card__data 
+                            svg.card__icon 
+                                use(xlink:href='/img/icons.svg#icon-flag')
+                            span=`${Tour.locations.length} Stops`
+                        .card__data 
+                            svg.card__icon 
+                                use(xlink:href='/img/icons.svg#icon-user')
+                            span=`${Tour.maxGroupSize} people`
+                    .card__footer 
+                        p
+                            span.card__footer-value=`$ ${Tour.price}`
+                            | 
+                            span.card__footer-text per person 
+                        p.card__rating 
+                            span.card__footer-value= Tour.ratingsAverage
+                            span.card__footer-text= ` ratings (${Tour.ratingsQuantity})`
+                        a.btn.btn--green.btn--small(href=`/tour/${Tour.slug}`) Details
+
+                        
+            
